@@ -38,21 +38,20 @@ int quickSelect(int arr[], int begin, int end, int k) {
 int main(int argc, char *argv[]) {
   int n = 0;
   int *arr = NULL;
-  char input[1024];
-
-  fgets(input, sizeof(input), stdin);
-
-  char *token = strtok(input, " ");
-  while (token != NULL) {
-    n++; 
-    arr = (int*) realloc(arr, n * sizeof(int));
-    arr[n-1] = strtol(token, NULL, 10);
-    token = strtok(NULL, " ");
-  }
+  char buffer[1024];
 
   int k = atoi(argv[2]);
+  while (fgets(buffer, 100, stdin)) {
+    if (buffer[0] == '\n') {
+        break;
+    }
+    int valor = atoi(buffer);
+    n++; 
+    arr = (int*) realloc(arr, n * sizeof(int)); 
+    arr[n-1] = valor;
+  }
 
-  printf("O %d menor número da lista é: %d\n", k, quickSelect(arr, 0, n - 1, k - 1));
+  printf("%d", quickSelect(arr, 0, n - 1, k - 1));
 
   free(arr);
 
