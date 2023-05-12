@@ -20,22 +20,25 @@ int main(int argc, char const *argv[])
 
   for (int i = 0; i < vertices; i++)
   {
-    graph[i] = (Node *) malloc(sizeof(Node));
+    graph[i] = (Node *)malloc(sizeof(Node));
     graph[i]->degree = 0;
   }
 
-  for (int i = 0; i < vertices; i++) {
+  for (int i = 0; i < vertices; i++)
+  {
 
     fgets(line, 100, stdin);
 
     char *token = strtok(line, " ");
     int j = 0;
-    while (token != NULL) {
-      if (token[0] == '\n') {
+    while (token != NULL)
+    {
+      if (token[0] == '\n')
+      {
         break;
       }
       int value = atoi(token);
-      graph[value-1]->degree++;
+      graph[value - 1]->degree++;
       graph[i]->next[j] = value;
       j++;
 
@@ -43,10 +46,11 @@ int main(int argc, char const *argv[])
     }
   }
 
-  for (int i = 0; i < vertices; i++) {
-    printf("Nó %i tem o grau: %d\n", i+1, graph[i]->degree);
+  for (int i = 0; i < vertices; i++)
+  {
+    printf("Nó %i tem o grau: %d\n", i + 1, graph[i]->degree);
   }
 
-
+  // Ainda falta o restante
   return 0;
 }
