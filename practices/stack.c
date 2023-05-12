@@ -7,18 +7,19 @@ typedef struct node
   struct node *next;
 } Node;
 
-void push(Node *top)
+Node *push(Node *top)
 {
   Node *new = malloc(sizeof(Node));
-  int temp;
+  int value;
   printf("\nDigite o valor desejado:\n");
-  scanf("%d", &temp);
+  scanf("%d", &value);
 
   if (new)
   {
-    new->key = temp;
+    new->key = value;
     new->next = top;
     top = new;
+    return new;
   }
   else
   {
@@ -27,22 +28,48 @@ void push(Node *top)
   }
 }
 
+void pop(Node **top)
+{
+  if (*top)
+  {
+    Node *remove = *top;
+    *top = remove->next;
+    free(remove);
+  }
+  else
+    printf("\nSem elementos na pilha...\n");
+}
+
+void printStack(Node *top)
+{
+  printf("\nInicio da pilha:\n");
+  while (top)
+  {
+    printf("\t%d\t", top->key);
+    top = top->next;
+  }
+}
+
 int main(int argc, char const *argv[])
 {
   Node *top = NULL;
   int opcao = 0;
-  while (opcao != 3)
+  while (opcao != 4)
   {
-    printf("\nEscolha uma das opcoes:\n1 - Empilhar\n2 - Remover\n3 - Sair\nR: ");
+    printf("\nEscolha uma das opcoes:\n1 - Empilhar\n2 - Remover\n3 - Imprimir a pilha\n4 - Sair\n");
     scanf("%d", &opcao);
     getchar();
 
     switch (opcao)
     {
     case 1:
-      push(top);
+      top = push(top);
       break;
     case 2:
+      pop(&top);
+      break;
+    case 3:
+      printStack(top);
       break;
 
     default:
